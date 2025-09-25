@@ -1,19 +1,44 @@
-requests
-ipykernel
-python-dotenv
-openai
-pydantic
-docling
-lancedb
-streamlit
-tiktoken
-streamlit
-python-dotenv
-langchain-docling
-langchain-core
-langchain-huggingface
-langchain-milvus
-langchain-text-splitters
-pymilvus
-docling-core
-sentence-transformers
+# Web scraping and utilities
+requests>=2.32.0
+beautifulsoup4>=4.12.0
+tiktoken>=0.11.0
+
+# Jupyter and development
+ipykernel>=6.30.0
+jupyter>=1.0.0
+nbconvert>=7.16.0
+
+# Environment management
+python-dotenv>=1.0.0
+
+# AI/ML frameworks
+openai>=1.0.0
+pydantic>=2.0.0
+sentence-transformers>=5.0.0
+transformers>=4.0.0
+torch>=2.0.0
+accelerate>=1.0.0
+
+# Document processing
+docling>=2.0.0
+docling-core>=2.0.0
+docling-parse>=4.0.0
+
+# LangChain ecosystem
+langchain>=0.1.0
+langchain-core>=0.3.0
+langchain-docling>=1.0.0
+langchain-huggingface>=0.3.0
+langchain-milvus>=0.2.0
+langchain-text-splitters>=0.3.0
+
+# Vector databases
+lancedb>=0.25.0
+pymilvus[milvus_lite]>=2.6.0
+
+# Web app framework
+streamlit>=1.50.0
+
+# Optional dependencies for advanced features (uncomment as needed)
+# easyocr>=1.7.0  # For OCR support
+# pypdfium2>=4.30.0  # For PDF processing

@@ -1,7 +1,7 @@
 # Structuring the Unstructured: Advanced Document Parsing for AI Workflows
 
 ## Overview
-This project provides tools and examples for converting unstructured documents (e.g., PDFs, images, presentations) into structured formats like JSON or Markdown. It leverages advanced AI models for document layout analysis, table structure recognition, and retrieval-augmented generation (RAG) pipelines.
+This project provides tools and examples for converting unstructured documents (e.g., PDFs, images, presentations) into structured formats like JSON or Markdown. It leverages advanced AI models for document layout analysis, table structure recognition, and retrieval-augmented generation (RAG) pipelines. 
 
 ## Features
 - **Document Conversion**: Convert PDFs, images, and other formats into structured data.
@@ -13,11 +13,25 @@ This project provides tools and examples for converting unstructured documents (
 ## Setup
 
 ### Prerequisites
-- Python 3.8 or higher
-- Install the required dependencies:
+- Python 3.8 or higher (tested with Python 3.13)
+- Virtual environment (recommended)
 
+### Installation
+
+1. Create and activate a virtual environment:
+```bash
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+
+2. Install the required dependencies:
 ```bash
 pip install -r requirements.txt
+```
+
+3. For RAG notebook support, install milvus-lite:
+```bash
+pip install "pymilvus[milvus_lite]"
 ```
 
 ### Environment Variables
@@ -52,10 +66,12 @@ streamlit run 6-streamlit-rag-app.py
 
 ### 3. Examples
 Explore the Jupyter notebooks in the repository for detailed examples:
-- `0-basic-example.ipynb`: Basic HTML parsing and token counting.
-- `1-experimentation.ipynb`: PDF and HTML extraction using Docling.
-- `2-multi-format-conversion.ipynb`: Multi-format document conversion.
-- `5-rag_langchain_docling.ipynb`: RAG pipeline with LangChain and Docling.
+- `0-basic-example.ipynb`: Basic HTML parsing and token counting using the CommitYourCode conference website.
+- `1-experimentation.ipynb`: PDF and HTML extraction using Docling with the CommitYourCode conference website.
+- `2-multi-format-conversion.ipynb`: Multi-format document conversion supporting PDFs, DOCX, PPTX, and more.
+- `3-annotate-pictures-smolvlm.ipynb`: Annotate pictures in PDFs using SmolVLM vision-language model.
+- `4-hybrid_chunking.ipynb`: Advanced hybrid chunking with tokenization-aware refinements.
+- `5-rag_langchain_docling.ipynb`: Complete RAG pipeline with LangChain, Docling, and Milvus vector database.
 
 ## License
 This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details.

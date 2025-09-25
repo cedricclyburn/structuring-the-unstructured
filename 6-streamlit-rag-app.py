@@ -13,6 +13,7 @@ from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_huggingface import HuggingFaceEndpoint
 
+
 # Load environment variables
 def _get_env_from_colab_or_os(key):
     try:
@@ -25,6 +26,7 @@ def _get_env_from_colab_or_os(key):
     except ImportError:
         pass
     return os.getenv(key)
+
 
 load_dotenv()
 
@@ -47,6 +49,7 @@ Answer:
 )
 TOP_K = int(os.getenv("TOP_K", 3))
 
+
 # Cache expensive initialization
 @st.cache_resource
 def init_rag_pipeline():
@@ -66,12 +69,14 @@ def init_rag_pipeline():
 
         splitter = MarkdownHeaderTextSplitter(
             headers_to_split_on=[
-                ('#', 'Header_1'),
-                ('##', 'Header_2'),
-                ('###', 'Header_3'),
+                ("#", "Header_1"),
+                ("##", "Header_2"),
+                ("###", "Header_3"),
             ],
         )
-        splits = [chunk for doc in docs for chunk in splitter.split_text(doc.page_content)]
+        splits = [
+            chunk for doc in docs for chunk in splitter.split_text(doc.page_content)
+        ]
 
     # 3. Create embeddings and ingest into Milvus
     embedding = HuggingFaceEmbeddings(model_name=EMBED_MODEL_ID)
@@ -96,6 +101,7 @@ def init_rag_pipeline():
 
     return rag_chain
 
+
 # Initialize app
 def main():
     st.title("📚 PDF Q&A with RAG")
@@ -104,13 +110,13 @@ def main():
     rag_chain = init_rag_pipeline()
 
     # Session state for chat history
-    if 'messages' not in st.session_state:
+    if "messages" not in st.session_state:
         st.session_state.messages = []
 
     # Display chat history
     for msg in st.session_state.messages:
-        with st.chat_message(msg['role']):
-            st.markdown(msg['content'])
+        with st.chat_message(msg["role"]):
+            st.markdown(msg["content"])
 
     # Handle user input
     if user_input := st.chat_input("Ask anything about the PDF..."):
@@ -124,7 +130,7 @@ def main():
         with st.spinner("Retrieving and generating answer..."):
             resp = rag_chain.invoke({"input": user_input})
 
-        answer = resp.get('answer', '').strip()
+        answer = resp.get("answer", "").strip()
 
         # Display assistant response
         with st.chat_message("assistant"):
@@ -132,6 +138,7 @@ def main():
 
         # Save assistant response
         st.session_state.messages.append({"role": "assistant", "content": answer})
+
 
 if __name__ == "__main__":
     main()
